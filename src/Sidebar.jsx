@@ -6,7 +6,7 @@
 import React from "react";
 import { Sortable } from "@progress/kendo-react-sortable";
 
-const getBaseItemStyle = (isActive) => ({
+const getBaseItemStyle = (isActive, isDragCue) => ({
   width: "44vw",
   height: "44vw",
   margin: "2vw",
@@ -16,7 +16,7 @@ const getBaseItemStyle = (isActive) => ({
   textAlign: "center",
   outline: "none",
   cursor: "move",
-  display: "inline-block",
+  display: isDragCue ? "none" : "inline-block",
   background: isActive ? "#27aceb" : "#bfe7f9",
   color: isActive ? "#fff" : "#1494d0",
   borderColor: isActive ? "#27aceb" : "#fff",
@@ -24,7 +24,7 @@ const getBaseItemStyle = (isActive) => ({
 
 const SortableItemUI = (props) => {
   const {
-    isDisabled, isActive, style, attributes, dataItem, forwardRef,
+    isDisabled, isActive, isDragCue, style, attributes, dataItem, forwardRef,
   } = props;
   const classNames = ["col-xs-6 col-sm-3"];
 
@@ -37,7 +37,7 @@ const SortableItemUI = (props) => {
       ref={forwardRef}
       {...attributes}
       style={{
-        ...getBaseItemStyle(isActive),
+        ...getBaseItemStyle(isActive, isDragCue),
         ...style,
       }}
       className={classNames.join(" ")}
@@ -84,15 +84,8 @@ class Sidebar extends React.Component {
         className="container-fluid"
         style={{
           marginLeft: "2vw",
-
         }}
       >
-        {/* <div className="example-config">
-          <h6>
-            Items:
-            {JSON.stringify(this.state.data)}
-          </h6>
-        </div> */}
         <Sortable
           idField="id"
           disabledField="disabled"
