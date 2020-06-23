@@ -16,6 +16,9 @@ function createWindow() {
     frame: false,
     resizable: false,
     disableAutoHideCursor: true,
+    webPreferences: {
+      webviewTag: true,
+    },
   });
 
   const startUrl = process.env.ELECTRON_START_URL || url.format({
