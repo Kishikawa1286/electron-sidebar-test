@@ -1,30 +1,24 @@
+/* ライブラリのテンプレートを使用している部分に警告が出ている */
 /* eslint-disable react/jsx-no-bind */
-/* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-props-no-spreading */
 
 import React from "react";
 import { Sortable } from "@progress/kendo-react-sortable";
+import TimePanel from "./panels/timePanel";
 
-const getBaseItemStyle = (isActive, isDragCue) => ({
-  width: "44vw",
-  height: "44vw",
-  margin: "2vw",
+const getBaseItemStyle = (isDragCue) => ({
+  width: "92vw",
+  margin: "8px 4vw 8px 4vw",
   border: "none",
-  lineHeight: "68px",
-  fontSize: "16px",
-  textAlign: "center",
   outline: "none",
   cursor: "move",
-  display: isDragCue ? "none" : "inline-block",
-  background: isActive ? "#27aceb" : "#bfe7f9",
-  color: isActive ? "#fff" : "#1494d0",
-  borderColor: isActive ? "#27aceb" : "#fff",
+  display: isDragCue ? "none" : "inline-block", // disable drag cue
 });
 
 const SortableItemUI = (props) => {
   const {
-    isDisabled, isActive, isDragCue, style, attributes, dataItem, forwardRef,
+    isDisabled, isDragCue, style, attributes, dataItem, forwardRef,
   } = props;
   const classNames = ["col-xs-6 col-sm-3"];
 
@@ -37,12 +31,13 @@ const SortableItemUI = (props) => {
       ref={forwardRef}
       {...attributes}
       style={{
-        ...getBaseItemStyle(isActive, isDragCue),
+        // dataItem.height is an optional assignment
+        ...getBaseItemStyle(isDragCue),
         ...style,
       }}
-      className={classNames.join(" ")}
+      className={classNames.join("")}
     >
-      {dataItem.text}
+      {dataItem.content}
     </div>
   );
 };
@@ -52,16 +47,9 @@ class Sidebar extends React.Component {
     super(props);
     this.state = {
       data: [
-        { id: 1, text: "item1" },
-        { id: 2, text: "item2" },
-        { id: 3, text: "item3" },
-        { id: 4, text: "item4" },
-        { id: 5, text: "item5" },
-        { id: 6, text: "item6" },
-        { id: 7, text: "item7" },
-        { id: 8, text: "item8" },
-        { id: 9, text: "item9" },
-        { id: 10, text: "item10" },
+        { id: 1, content: <TimePanel /> },
+        { id: 2, content: <TimePanel /> },
+        { id: 3, content: <TimePanel /> },
       ],
     };
   }
@@ -79,17 +67,19 @@ class Sidebar extends React.Component {
   }
 
   render() {
+    const { data } = this.state;
     return (
       <div
         className="container-fluid"
         style={{
-          marginLeft: "2vw",
+          height: "100vh",
+          backgroundColor: "rgba(64, 64, 64, 0.3)",
         }}
       >
         <Sortable
           idField="id"
           disabledField="disabled"
-          data={this.state.data}
+          data={data}
 
           itemUI={SortableItemUI}
 
