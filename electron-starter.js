@@ -17,6 +17,7 @@ function createWindow() {
     disableAutoHideCursor: true,
     webPreferences: {
       webviewTag: true,
+      zoomFactor: 1.0,
     },
   });
 

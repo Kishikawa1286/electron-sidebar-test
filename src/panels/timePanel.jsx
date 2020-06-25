@@ -34,7 +34,7 @@ class TimePanel extends React.Component {
     return (
       <div
         style={{
-          height: "256px",
+          height: "72px",
           background: "rgba(0, 0, 0, 0.5)",
           textAlign: "center",
           color: "#FFFFFF",
@@ -46,9 +46,9 @@ class TimePanel extends React.Component {
           <p
             style={{
               margin: 0,
-              paddingTop: "16px",
-              lineHeight: "128px",
-              fontSize: "116px",
+              paddingTop: "4px",
+              lineHeight: "36px",
+              fontSize: "38px",
             }}
           >
             {`${time.getHours()} : ${time.getMinutes()}`}
@@ -60,8 +60,8 @@ class TimePanel extends React.Component {
           <p
             style={{
               margin: 0,
-              paddingBottom: "16px",
-              fontSize: "72px",
+              paddingBottom: "4px",
+              fontSize: "24px",
             }}
           >
             {`${this.generateDay()}, ${time.getDate()} ${time.getMonth() + 1}, ${time.getFullYear()}`}

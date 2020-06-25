@@ -5,7 +5,7 @@ const WebviewPanel = (props) => {
   const { height = 200, src = "https://google.com" } = props;
   return (
     <div style={{ width: "100%", height: `${height}px` }}>
-      <webview src={src} height={height.toString()} style={{ minHeight: "900px" }} />
+      <webview src={src} height={height.toString()} style={{ minHeight: `${height}px` }} />
     </div>
   );
 };
