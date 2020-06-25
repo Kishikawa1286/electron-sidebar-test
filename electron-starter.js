@@ -1,16 +1,15 @@
-const { app, BrowserWindow, screen } = require("electron");
-
+const { app, BrowserWindow } = require("electron");
 const path = require("path");
 const url = require("url");
 
 let mainWindow;
 
 function createWindow() {
-  const { width, height } = screen.getPrimaryDisplay().workAreaSize;
+  // 組み込みモジュールscreenが動いていない.自分のMacの画面のサイズを基に値を入れている.
   mainWindow = new BrowserWindow({
-    width: width * 0.3,
-    height,
-    x: width * 0.7,
+    width: 512,
+    height: 1600,
+    x: 2048,
     y: 0,
     transparent: true,
     frame: false,
@@ -22,7 +21,7 @@ function createWindow() {
   });
 
   const startUrl = process.env.ELECTRON_START_URL || url.format({
-    pathname: path.join(__dirname, "/../build/index.html"),
+    pathname: path.join(__dirname, "./build/index.html"),
     protocol: "file:",
     slashes: true,
   });

@@ -2,8 +2,8 @@ import React from "react";
 
 // 時間の取得処理に脆弱性あり
 class TimePanel extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       time: new Date(),
     };
