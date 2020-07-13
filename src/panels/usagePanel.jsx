@@ -22,7 +22,7 @@ const getUsedCpuPercentage = () => {
 const getUsedMemPercentage = () => {
   const freeMem = os.freemem();
   const totalMem = os.totalmem();
-  const usedMemPercentage = freeMem / totalMem;
+  const usedMemPercentage = (freeMem / totalMem) * 100;
   return usedMemPercentage;
 };
 
