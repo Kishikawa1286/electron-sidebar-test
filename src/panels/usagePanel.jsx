@@ -10,10 +10,10 @@ const getUsedCpuPercentage = () => {
     } = cpu.times;
     const used = user + nice + sys + irq;
     const total = used + idle;
-    return used / total;
+    return (used / total) * 100;
   });
   const usedCpuPercentage = !isEmpty(usedPercentageOfEachCpu.length)
-    ? (sum(usedPercentageOfEachCpu) / usedPercentageOfEachCpu.length) * 100
+    ? sum(usedPercentageOfEachCpu) / usedPercentageOfEachCpu.length
     : 0;
   return usedCpuPercentage;
 };
