@@ -1,6 +1,6 @@
 import React from "react";
 import os from "os";
-import { isEmpty } from "lodash";
+import { isEmpty, sum } from "lodash";
 
 const getUsedCpuPercentage = () => {
   const cpus = os.cpus();
@@ -13,8 +13,7 @@ const getUsedCpuPercentage = () => {
     return used / total;
   });
   const usedCpuPercentage = !isEmpty(usedPercentageOfEachCpu.length)
-    ? (usedPercentageOfEachCpu.reduce((sumSoFar, current) => sumSoFar + current)
-      / usedPercentageOfEachCpu.length) * 100
+    ? (sum(usedPercentageOfEachCpu) / usedPercentageOfEachCpu.length) * 100
     : 0;
   return usedCpuPercentage;
 };
