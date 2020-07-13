@@ -1,29 +1,5 @@
 import React from "react";
-import os from "os";
-import { isEmpty, sum } from "lodash";
-
-const getUsedCpuPercentage = () => {
-  const cpus = os.cpus();
-  const usedPercentageOfEachCpu = cpus.map((cpu) => {
-    const {
-      user, nice, sys, idle, irq,
-    } = cpu.times;
-    const used = user + nice + sys + irq;
-    const total = used + idle;
-    return (used / total) * 100;
-  });
-  const usedCpuPercentage = !isEmpty(usedPercentageOfEachCpu.length)
-    ? sum(usedPercentageOfEachCpu) / usedPercentageOfEachCpu.length
-    : 0;
-  return usedCpuPercentage;
-};
-
-const getUsedMemPercentage = () => {
-  const freeMem = os.freemem();
-  const totalMem = os.totalmem();
-  const usedMemPercentage = (freeMem / totalMem) * 100;
-  return usedMemPercentage;
-};
+import { getUsedCpuPercentage, getUsedMemPercentage } from "./getUsedResource";
 
 class UsagePanel extends React.Component {
   constructor() {

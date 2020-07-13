@@ -10,7 +10,6 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: width * 0.3,
     height,
-    // OSに依存する可能性あり
     x: width * 0.7,
     y: 0,
     transparent: true,
