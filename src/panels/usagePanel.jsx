@@ -2,6 +2,30 @@ import React from "react";
 import os from "os";
 import { isEmpty } from "lodash";
 
+const getUsedCpuPercentage = () => {
+  const cpus = os.cpus();
+  const usedPercentageOfEachCpu = cpus.map((cpu) => {
+    const {
+      user, nice, sys, idle, irq,
+    } = cpu.times;
+    const used = user + nice + sys + irq;
+    const total = used + idle;
+    return used / total;
+  });
+  const usedCpuPercentage = !isEmpty(usedPercentageOfEachCpu.length)
+    ? (usedPercentageOfEachCpu.reduce((sumSoFar, current) => sumSoFar + current)
+      / usedPercentageOfEachCpu.length) * 100
+    : 0;
+  return usedCpuPercentage;
+};
+
+const getUsedMemPercentage = () => {
+  const freeMem = os.freemem();
+  const totalMem = os.totalmem();
+  const usedMemPercentage = freeMem / totalMem;
+  return usedMemPercentage;
+};
+
 class UsagePanel extends React.Component {
   constructor() {
     super();
@@ -13,22 +37,8 @@ class UsagePanel extends React.Component {
 
   componentDidMount() {
     setInterval(() => {
-      const cpus = os.cpus();
-      const usedPercentageOfEachCpu = cpus.map((cpu) => {
-        const {
-          user, nice, sys, idle, irq,
-        } = cpu.times;
-        const used = user + nice + sys + irq;
-        const total = used + idle;
-        return used / total;
-      });
-      const usedCpuPercentage = !isEmpty(usedPercentageOfEachCpu.length)
-        ? usedPercentageOfEachCpu.reduce((sumSoFar, current) => sumSoFar + current)
-          / usedPercentageOfEachCpu.length
-        : 0;
-      const freeMem = os.freemem();
-      const totalMem = os.totalmem();
-      const usedMemPercentage = freeMem / totalMem;
+      const usedCpuPercentage = getUsedCpuPercentage();
+      const usedMemPercentage = getUsedMemPercentage();
       this.setState({ usedCpuPercentage, usedMemPercentage });
     }, 1000);
   }
