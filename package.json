@@ -11,7 +11,6 @@
     "@testing-library/user-event": "^7.1.2",
     "add": "^2.0.6",
     "electron": "^9.0.5",
-    "os-utils": "^0.0.14",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1"
