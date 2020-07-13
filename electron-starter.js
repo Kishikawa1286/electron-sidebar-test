@@ -1,6 +1,7 @@
 const { app, screen, BrowserWindow } = require("electron");
-const path = require("path");
-const url = require("url");
+const { join } = require("path");
+const { format } = require("url");
+const { platform } = require("os");
 
 let mainWindow;
 
@@ -10,7 +11,7 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: width * 0.3,
     height,
-    x: width * 0.7,
+    x: (platform() === "darwin") ? width : width * 0.7,
     y: 0,
     transparent: true,
     frame: false,
@@ -22,8 +23,8 @@ function createWindow() {
     },
   });
 
-  const startUrl = process.env.ELECTRON_START_URL || url.format({
-    pathname: path.join(__dirname, "./build/index.html"),
+  const startUrl = process.env.ELECTRON_START_URL || format({
+    pathname: join(__dirname, "./build/index.html"),
     protocol: "file:",
     slashes: true,
   });

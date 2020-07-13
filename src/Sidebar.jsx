@@ -7,7 +7,7 @@ import React from "react";
 import { Sortable } from "@progress/kendo-react-sortable";
 import TimePanel from "./panels/timePanel";
 import WebviewPanel from "./panels/webviewPanel";
-import UsagePanel from "./panels/usagePanel";
+// import UsagePanel from "./panels/usagePanel";
 
 const getBaseItemStyle = (isDragCue) => ({
   width: "92vw",
