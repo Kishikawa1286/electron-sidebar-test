@@ -51,6 +51,7 @@ class Sidebar extends React.Component {
         { id: 1, content: <TimePanel /> },
         { id: 2, content: <WebviewPanel height={520} src="https://youtube.com" /> },
         { id: 3, content: <WebviewPanel height={500} src="https://discord.com/login" /> },
+        { id: 4, content: <WebviewPanel height={500} src="https://github.com" /> },
       ],
     };
   }
