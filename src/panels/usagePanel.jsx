@@ -1,5 +1,6 @@
 import React from "react";
 import os from "os";
+import { isEmpty } from "lodash";
 
 class UsagePanel extends React.Component {
   constructor() {
@@ -12,7 +13,23 @@ class UsagePanel extends React.Component {
 
   componentDidMount() {
     setInterval(() => {
-      /* update state here */
+      const cpus = os.cpus();
+      const usedPercentageOfEachCpu = cpus.map((cpu) => {
+        const {
+          user, nice, sys, idle, irq,
+        } = cpu.times;
+        const used = user + nice + sys + irq;
+        const total = used + idle;
+        return used / total;
+      });
+      const usedCpuPercentage = !isEmpty(usedPercentageOfEachCpu.length)
+        ? usedPercentageOfEachCpu.reduce((sumSoFar, current) => sumSoFar + current)
+          / usedPercentageOfEachCpu.length
+        : 0;
+      const freeMem = os.freemem();
+      const totalMem = os.totalmem();
+      const usedMemPercentage = freeMem / totalMem;
+      this.setState({ usedCpuPercentage, usedMemPercentage });
     }, 1000);
   }
 
@@ -36,7 +53,7 @@ class UsagePanel extends React.Component {
             fontSize: "38px",
           }}
         >
-          {`Cpu : ${usedCpuPercentage}% used`}
+          {`Cpu : ${usedCpuPercentage.toFixed(1)}% used`}
         </p>
         <p
           style={{
@@ -46,7 +63,7 @@ class UsagePanel extends React.Component {
             fontSize: "38px",
           }}
         >
-          {`Memory : ${usedMemPercentage}% used`}
+          {`Memory : ${usedMemPercentage.toFixed(1)}% used`}
         </p>
       </div>
     );

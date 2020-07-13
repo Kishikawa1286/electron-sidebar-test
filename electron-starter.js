@@ -1,5 +1,4 @@
-const { app, BrowserWindow } = require("electron");
-const { screen } = require("electron");
+const { app, screen, BrowserWindow } = require("electron");
 const path = require("path");
 const url = require("url");
 
@@ -8,11 +7,11 @@ let mainWindow;
 function createWindow() {
   const { size } = screen.getPrimaryDisplay();
   const { width, height } = size;
-  // 組み込みモジュールscreenが動いていない.自分のMacの画面のサイズを基に値を入れている.
   mainWindow = new BrowserWindow({
     width: width * 0.3,
     height,
-    x: width,
+    // OSに依存する可能性あり
+    x: width * 0.7,
     y: 0,
     transparent: true,
     frame: false,
