@@ -1,6 +1,6 @@
 import React from "react";
 
-const WebviewPanel = (props) => {
+const WebViewPanel = (props) => {
   // eslint-disable-next-line react/prop-types
   const { height = 200, src = "https://google.com" } = props;
   return (
@@ -10,4 +10,4 @@ const WebviewPanel = (props) => {
   );
 };
 
-export default WebviewPanel;
+export default WebViewPanel;
