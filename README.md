@@ -2,8 +2,12 @@
 
 ## 環境構築手順
 - リポジトリをクローン
+```
+$ git clone https://github.com/Kishikawa1286/electron-sidebar-test.git
+```
 - パッケージをインストール
 ```
+$ cd electron-sidebar-test
 $ yarn install
 ```
 
@@ -11,12 +15,4 @@ $ yarn install
 - ビルドしてelectronで起動
 ```
 yarn electron-start
-```
-- ブラウザで起動(要ビルド)
-```
-yarn start
-```
-- ビルド
-```
-yarn build
 ```
