@@ -49,9 +49,9 @@ class Sidebar extends React.Component {
       data: [
         { id: 0, content: <TimePanel addWebViewPanel={this.addWebViewPanel.bind(this)} /> },
         { id: 1, content: <UsagePanel /> },
-        { id: 2, content: <WebViewPanel height={520} src="https://youtube.com" /> },
-        { id: 3, content: <WebViewPanel height={500} src="https://discord.com/login" /> },
-        { id: 4, content: <WebViewPanel height={500} src="https://github.com" /> },
+        { id: 2, content: <WebViewPanel height={520} src="https://youtube.com" deleteWebViewPanel={() => this.deleteWebViewPanel(2)} /> },
+        { id: 3, content: <WebViewPanel height={500} src="https://discord.com/login" deleteWebViewPanel={() => this.deleteWebViewPanel(3)} /> },
+        { id: 4, content: <WebViewPanel height={500} src="https://github.com" deleteWebViewPanel={() => this.deleteWebViewPanel(4)} /> },
       ],
     };
   }
@@ -67,8 +67,35 @@ class Sidebar extends React.Component {
   addWebViewPanel() {
     const { data } = this.state;
     const { length } = data;
-    data.push({ id: length, content: <WebViewPanel height={500} src="https://google.com" /> });
+    data.push({
+      id: length,
+      content: <WebViewPanel
+        height={500}
+        src="https://google.com"
+        deleteWebViewPanel={() => this.deleteWebViewPanel(length)}
+      />,
+    });
     this.setState({ data });
+  }
+
+  deleteWebViewPanel(deletedId) {
+    const { data } = this.state;
+    const sliced = data.filter((element) => element.id !== deletedId);
+    const newState = sliced.map((element) => {
+      const { props } = element.content;
+      if (element.id > deletedId) {
+        return {
+          id: element.id - 1,
+          content: <WebViewPanel
+            height={props.height}
+            src={props.src}
+            deleteWebViewPanel={() => this.deleteWebViewPanel(element.id - 1)}
+          />,
+        };
+      }
+      return element;
+    });
+    this.setState({ data: newState });
   }
 
   render() {

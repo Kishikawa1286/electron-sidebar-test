@@ -3,12 +3,12 @@
 ## 環境構築手順
 - リポジトリをクローン
 ```
-$ git clone https://github.com/Kishikawa1286/electron-sidebar-test.git
+git clone https://github.com/Kishikawa1286/electron-sidebar-test.git
 ```
 - パッケージをインストール
 ```
-$ cd electron-sidebar-test
-$ yarn install
+cd electron-sidebar-test
+yarn install
 ```
 
 ## scripts
