@@ -1,5 +1,6 @@
 import React from "react";
-import { getUsedCpuPercentage, getUsedMemPercentage } from "./getUsedResource";
+// eslint-disable-next-line no-undef
+const { ipcRenderer } = window.native;
 
 class UsagePanel extends React.Component {
   constructor() {
@@ -12,10 +13,17 @@ class UsagePanel extends React.Component {
 
   componentDidMount() {
     setInterval(() => {
-      const usedCpuPercentage = getUsedCpuPercentage();
-      const usedMemPercentage = getUsedMemPercentage();
-      this.setState({ usedCpuPercentage, usedMemPercentage });
+      ipcRenderer.send("usedCpuPercentage");
+      ipcRenderer.send("usedMemPercentage");
     }, 1000);
+
+    ipcRenderer.on("usedCpuPercentage-reply", (event, usedCpuPercentage) => this.setState({ usedCpuPercentage }));
+    ipcRenderer.on("usedMemPercentage-reply", (event, usedMemPercentage) => this.setState({ usedMemPercentage }));
+  }
+
+  componentWillUnmount() {
+    ipcRenderer.removeListener("usedCpuPercentage-reply", (event, usedCpuPercentage) => this.setState({ usedCpuPercentage }));
+    ipcRenderer.removeListener("usedMemPercentage-reply", (event, usedMemPercentage) => this.setState({ usedMemPercentage }));
   }
 
   render() {

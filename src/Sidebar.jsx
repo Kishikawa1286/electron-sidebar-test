@@ -7,7 +7,7 @@ import React from "react";
 import { Sortable } from "@progress/kendo-react-sortable";
 import TimePanel from "./panels/timePanel/timePanel";
 import WebViewPanel from "./panels/webViewPanel/webviewPanel";
-// import UsagePanel from "./panels/usagePanel";
+import UsagePanel from "./panels/usagePanel/usagePanel";
 
 const getBaseItemStyle = (isDragCue) => ({
   width: "92vw",
@@ -50,9 +50,10 @@ class Sidebar extends React.Component {
     this.state = {
       data: [
         { id: 0, content: <TimePanel addWebViewPanel={this.addWebViewPanel.bind(this)} /> },
-        { id: 1, content: <WebViewPanel id={1} height={520} src="https://youtube.com" /> },
-        { id: 2, content: <WebViewPanel id={2} height={500} src="https://discord.com/login" /> },
-        { id: 3, content: <WebViewPanel id={3} height={500} src="https://github.com" /> },
+        { id: 1, content: <UsagePanel /> },
+        { id: 2, content: <WebViewPanel height={520} src="https://youtube.com" /> },
+        { id: 3, content: <WebViewPanel height={500} src="https://discord.com/login" /> },
+        { id: 4, content: <WebViewPanel height={500} src="https://github.com" /> },
       ],
     };
   }

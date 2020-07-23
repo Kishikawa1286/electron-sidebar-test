@@ -1,7 +1,10 @@
-const { app, screen, BrowserWindow } = require("electron");
+const {
+  app, screen, BrowserWindow, ipcMain,
+} = require("electron");
 const { join } = require("path");
 const { format } = require("url");
 const { platform } = require("os");
+const { getUsedCpuPercentage, getUsedMemPercentage } = require("./lib/getUsedResource");
 
 let mainWindow;
 
@@ -17,9 +20,12 @@ function createWindow() {
     frame: false,
     resizable: false,
     disableAutoHideCursor: true,
+    // TODO: contextBridgeを使えばtrueにできる
+    contextIsolation: false,
     webPreferences: {
       webviewTag: true,
       zoomFactor: 1.0,
+      preload: `${__dirname}/preload.js`,
     },
   });
 
@@ -47,4 +53,15 @@ app.on("activate", () => {
   if (mainWindow === null) {
     createWindow();
   }
+});
+
+// TODO: ipcMainを一つにまとめて文字列argで処理を分岐させる
+ipcMain.on("usedCpuPercentage", (event) => {
+  const usedCpuPercentage = getUsedCpuPercentage();
+  event.reply("usedCpuPercentage-reply", usedCpuPercentage);
+});
+
+ipcMain.on("usedMemPercentage", (event) => {
+  const usedMemPercentage = getUsedMemPercentage();
+  event.reply("usedMemPercentage-reply", usedMemPercentage);
 });
