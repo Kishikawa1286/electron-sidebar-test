@@ -49,24 +49,27 @@ class Sidebar extends React.Component {
     super(props);
     this.state = {
       data: [
-        { id: 1, content: <TimePanel /> },
-        { id: 2, content: <WebViewPanel height={520} src="https://youtube.com" /> },
-        { id: 3, content: <WebViewPanel height={500} src="https://discord.com/login" /> },
-        { id: 4, content: <WebViewPanel height={500} src="https://github.com" /> },
+        { id: 0, content: <TimePanel addWebViewPanel={this.addWebViewPanel.bind(this)} /> },
+        { id: 1, content: <WebViewPanel id={1} height={520} src="https://youtube.com" /> },
+        { id: 2, content: <WebViewPanel id={2} height={500} src="https://discord.com/login" /> },
+        { id: 3, content: <WebViewPanel id={3} height={500} src="https://github.com" /> },
       ],
     };
   }
 
   onDragOver(event) {
-    this.setState({
-      data: event.newState,
-    });
+    this.setState({ data: event.newState });
   }
 
   onNavigate(event) {
-    this.setState({
-      data: event.newState,
-    });
+    this.setState({ data: event.newState });
+  }
+
+  addWebViewPanel() {
+    const { data } = this.state;
+    const { length } = data;
+    data.push({ id: length, content: <WebViewPanel height={500} src="https://google.com" /> });
+    this.setState({ data });
   }
 
   render() {
