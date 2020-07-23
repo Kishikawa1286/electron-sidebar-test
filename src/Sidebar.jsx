@@ -24,9 +24,7 @@ const SortableItemUI = (props) => {
   } = props;
   const classNames = ["col-xs-6 col-sm-3"];
 
-  if (isDisabled) {
-    classNames.push("k-state-disabled");
-  }
+  if (isDisabled) classNames.push("k-state-disabled");
 
   return (
     <div

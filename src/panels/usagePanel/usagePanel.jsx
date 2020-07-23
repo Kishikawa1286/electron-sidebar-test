@@ -17,22 +17,31 @@ class UsagePanel extends React.Component {
       ipcRenderer.send("usedMemPercentage");
     }, 1000);
 
-    ipcRenderer.on("usedCpuPercentage-reply", (event, usedCpuPercentage) => this.setState({ usedCpuPercentage }));
-    ipcRenderer.on("usedMemPercentage-reply", (event, usedMemPercentage) => this.setState({ usedMemPercentage }));
+    ipcRenderer.on("usedCpuPercentage-reply", (event, usedCpuPercentage) => {
+      this.setState({ usedCpuPercentage });
+    });
+    ipcRenderer.on("usedMemPercentage-reply", (event, usedMemPercentage) => {
+      this.setState({ usedMemPercentage });
+    });
   }
 
   componentWillUnmount() {
-    ipcRenderer.removeListener("usedCpuPercentage-reply", (event, usedCpuPercentage) => this.setState({ usedCpuPercentage }));
-    ipcRenderer.removeListener("usedMemPercentage-reply", (event, usedMemPercentage) => this.setState({ usedMemPercentage }));
+    ipcRenderer.removeListener("usedCpuPercentage-reply", (event, usedCpuPercentage) => {
+      this.setState({ usedCpuPercentage });
+    });
+    ipcRenderer.removeListener("usedMemPercentage-reply", (event, usedMemPercentage) => {
+      this.setState({ usedMemPercentage });
+    });
   }
 
   render() {
     const { usedCpuPercentage, usedMemPercentage } = this.state;
+    const height = "72px";
     return (
       <div
         style={{
           display: "flex",
-          height: "72px",
+          height,
           background: "rgba(0, 0, 0, 0.5)",
           textAlign: "center",
           color: "#FFFFFF",
@@ -44,6 +53,7 @@ class UsagePanel extends React.Component {
             margin: 0,
             padding: 0,
             fontSize: "38px",
+            lineHeight: height,
           }}
         >
           {`Cpu : ${usedCpuPercentage.toFixed(1)}% used`}
@@ -54,6 +64,7 @@ class UsagePanel extends React.Component {
             margin: 0,
             padding: 0,
             fontSize: "38px",
+            lineHeight: height,
           }}
         >
           {`Memory : ${usedMemPercentage.toFixed(1)}% used`}
