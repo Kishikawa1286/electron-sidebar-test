@@ -60,7 +60,7 @@ class TimePanel extends React.Component {
                   fontSize: "38px",
                 }}
               >
-                {`${time.getHours()} : ${time.getMinutes()}`}
+                {`${time.getHours() < 10 ? "0" : ""}${time.getHours()} : ${time.getMinutes() < 10 ? "0" : ""}${time.getMinutes()}`}
               </p>
             </div>
             <div className="time_lower">
