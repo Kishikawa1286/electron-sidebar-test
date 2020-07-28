@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 const builder = require("electron-builder");
 
 const { Platform } = builder;

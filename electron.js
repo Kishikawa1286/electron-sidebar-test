@@ -1,9 +1,9 @@
 const {
   app, screen, BrowserWindow, ipcMain,
+// eslint-disable-next-line import/no-extraneous-dependencies
 } = require("electron");
 const { join } = require("path");
 const { format } = require("url");
-const { platform } = require("os");
 const { getUsedCpuPercentage, getUsedMemPercentage } = require("./lib/getUsedResource");
 
 let mainWindow;
@@ -14,7 +14,7 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: width * 0.3,
     height,
-    x: (platform() === "darwin") ? width : width * 0.7,
+    x: (process.platform === "darwin") ? width : width * 0.7,
     y: 0,
     transparent: true,
     frame: false,
