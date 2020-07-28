@@ -1,7 +1,7 @@
 {
   "name": "electron-sidebar-test",
   "version": "0.1.0",
-  "main": "./electron-starter.js",
+  "main": "./electron.js",
   "homepage": "./",
   "private": true,
   "dependencies": {
