@@ -23,6 +23,7 @@
         "react"
     ],
     "rules": {
+        "no-exrtraneous-dependencies": "off",
         "indent": [
             "error",
             2

@@ -4,7 +4,7 @@ const {
 const { join } = require("path");
 const { format } = require("url");
 const { platform } = require("os");
-const { getUsedCpuPercentage, getUsedMemPercentage } = require("./lib/getUsedResource");
+const { getUsedCpuPercentage, getUsedMemPercentage } = require("../lib/getUsedResource");
 
 let mainWindow;
 
