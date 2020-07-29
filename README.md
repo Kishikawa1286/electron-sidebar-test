@@ -11,8 +11,12 @@ cd electron-sidebar-test
 yarn install
 ```
 
-## scripts
+## 実行
 - ビルドしてelectronで起動
 ```
 yarn electron-start
 ```
+
+### 補足
+アプリとしてビルドするためのディレクトリ構成にはなっていません。
+スクリプトを実行してもエラーになります。
