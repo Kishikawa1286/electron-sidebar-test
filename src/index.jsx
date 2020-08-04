@@ -6,7 +6,6 @@ ReactDOM.render(
   <React.StrictMode>
     <Sidebar />
   </React.StrictMode>,
-  /* XSSの危険あり */
   // eslint-disable-next-line no-undef
   document.getElementById("root"),
 );

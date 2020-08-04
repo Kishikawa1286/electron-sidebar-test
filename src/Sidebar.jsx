@@ -5,8 +5,10 @@
 
 import React from "react";
 import { Sortable } from "@progress/kendo-react-sortable";
+import { generate } from "shortid";
 import TimePanel from "./panels/timePanel/timePanel";
 import WebViewPanel from "./panels/webViewPanel/webviewPanel";
+import AddWebViewpanel from "./panels/webViewPanel/addWebViewPanel";
 import UsagePanel from "./panels/usagePanel/usagePanel";
 
 const getBaseItemStyle = (isDragCue) => ({
@@ -47,38 +49,34 @@ class Sidebar extends React.Component {
     super(props);
     this.state = {
       data: [
-        { id: 0, content: <TimePanel addWebViewPanel={this.addWebViewPanel.bind(this)} /> },
+        { id: 0, content: <TimePanel /> },
         { id: 1, content: <UsagePanel /> },
-        { id: 2, content: <WebViewPanel height={520} src="https://youtube.com" deleteWebViewPanel={() => this.deleteWebViewPanel(2)} /> },
-        { id: 3, content: <WebViewPanel height={500} src="https://discord.com/login" deleteWebViewPanel={() => this.deleteWebViewPanel(3)} /> },
-        { id: 4, content: <WebViewPanel height={500} src="https://github.com" deleteWebViewPanel={() => this.deleteWebViewPanel(4)} /> },
+        { id: 2, content: <AddWebViewpanel addWebView={this.addWebView.bind(this)} /> },
       ],
     };
   }
 
-  onDragOver(event) {
+  onDrag(event) {
     this.setState({ data: event.newState });
   }
 
-  onNavigate(event) {
-    this.setState({ data: event.newState });
-  }
-
-  addWebViewPanel() {
+  addWebView(src = "https://google.com") {
     const { data } = this.state;
     const { length } = data;
+    const key = generate();
     data.push({
       id: length,
       content: <WebViewPanel
+        key={key}
         height={500}
-        src="https://google.com"
-        deleteWebViewPanel={() => this.deleteWebViewPanel(length)}
+        src={src}
+        deleteWebView={() => this.deleteWebView(length)}
       />,
     });
     this.setState({ data });
   }
 
-  deleteWebViewPanel(deletedId) {
+  deleteWebView(deletedId) {
     const { data } = this.state;
     const sliced = data.filter((element) => element.id !== deletedId);
     const newState = sliced.map((element) => {
@@ -87,9 +85,10 @@ class Sidebar extends React.Component {
         return {
           id: element.id - 1,
           content: <WebViewPanel
+            key={props.key}
             height={props.height}
             src={props.src}
-            deleteWebViewPanel={() => this.deleteWebViewPanel(element.id - 1)}
+            deleteWebView={() => this.deleteWebView(element.id - 1)}
           />,
         };
       }
@@ -115,8 +114,8 @@ class Sidebar extends React.Component {
 
           itemUI={SortableItemUI}
 
-          onDragOver={this.onDragOver.bind(this)}
-          onNavigate={this.onNavigate.bind(this)}
+          onDragOver={this.onDrag.bind(this)}
+          onNavigate={this.onDrag.bind(this)}
         />
       </div>
     );

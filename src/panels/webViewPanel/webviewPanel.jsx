@@ -30,8 +30,10 @@ class WebViewPanel extends React.Component {
   }
 
   render() {
-  // eslint-disable-next-line react/prop-types
-    const { height = 200, src = "https://google.com", deleteWebViewPanel } = this.props;
+    const {
+      // eslint-disable-next-line react/prop-types
+      key, height = 200, src = "https://google.com", deleteWebView,
+    } = this.props;
     return (
       <div>
         <div
@@ -43,12 +45,13 @@ class WebViewPanel extends React.Component {
             background: "rgba(0, 0, 0, 0.5)",
           }}
         >
-          <WebViewAppBarButton text="✕" onClick={deleteWebViewPanel} />
+          <WebViewAppBarButton text="✕" onClick={deleteWebView} />
           <WebViewAppBarButton text="<" onClick={() => this.webViewRef.goBack()} />
           <WebViewAppBarButton text=">" onClick={() => this.webViewRef.goForward()} />
         </div>
         <div style={{ width: "100%", height: `${height}px` }}>
           <webview
+            key={key || "key_expected"}
             src={src}
             height={height.toString()}
             style={{ minHeight: `${height}px` }}

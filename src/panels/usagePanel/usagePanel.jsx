@@ -52,7 +52,7 @@ class UsagePanel extends React.Component {
             width: "49.5%",
             margin: 0,
             padding: 0,
-            fontSize: "38px",
+            fontSize: "32px",
             lineHeight: height,
           }}
         >
@@ -63,7 +63,7 @@ class UsagePanel extends React.Component {
             width: "49.5%",
             margin: 0,
             padding: 0,
-            fontSize: "38px",
+            fontSize: "32px",
             lineHeight: height,
           }}
         >

@@ -3,8 +3,8 @@ import React from "react";
 // 時間の取得処理に脆弱性あり
 class TimePanel extends React.Component {
   // eslint-disable-next-line react/prop-types
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = { time: new Date() };
   }
 
@@ -30,116 +30,40 @@ class TimePanel extends React.Component {
   }
 
   render() {
-    // eslint-disable-next-line react/prop-types
-    const { addWebViewPanel } = this.props;
     const { time } = this.state;
     return (
-      typeof addWebViewPanel === "function" ? (
-        <div
-          style={{
-            display: "flex",
-            height: "72px",
-            background: "rgba(0, 0, 0, 0.5)",
-            textAlign: "center",
-            color: "#FFFFFF",
-          }}
-        >
-          <div
+      <div
+        style={{
+          height: "72px",
+          background: "rgba(0, 0, 0, 0.5)",
+          textAlign: "center",
+          color: "#FFFFFF",
+        }}
+      >
+        <div className="time_upper">
+          <p
             style={{
               margin: 0,
-              padding: 0,
-              width: "70%",
+              paddingTop: "4px",
+              lineHeight: "36px",
+              fontSize: "38px",
             }}
           >
-            <div className="time_upper">
-              <p
-                style={{
-                  margin: 0,
-                  paddingTop: "4px",
-                  lineHeight: "36px",
-                  fontSize: "38px",
-                }}
-              >
-                {`${time.getHours() < 10 ? "0" : ""}${time.getHours()} : ${time.getMinutes() < 10 ? "0" : ""}${time.getMinutes()}`}
-              </p>
-            </div>
-            <div className="time_lower">
-              <p
-                style={{
-                  margin: 0,
-                  paddingBottom: "4px",
-                  fontSize: "24px",
-                }}
-              >
-                {`${this.generateDay()}, ${time.getDate()} ${time.getMonth() + 1}, ${time.getFullYear()}`}
-              </p>
-            </div>
-          </div>
-          <div
+            {`${time.getHours()} : ${time.getMinutes()}`}
+          </p>
+        </div>
+        <div className="time_lower">
+          <p
             style={{
               margin: 0,
-              padding: 0,
-              width: "30%",
+              paddingBottom: "4px",
+              fontSize: "24px",
             }}
           >
-            <button
-              type="button"
-              onClick={addWebViewPanel}
-              style={{
-                width: "100%",
-                height: "100%",
-                margin: 0,
-                padding: 0,
-                border: "none",
-                outline: 0,
-                background: "rgba(0, 0, 0, 0)",
-                fontSize: "24px",
-                color: "#FFFFFF",
-                textAlign: "center",
-              }}
-            >
-              Add web view
-            </button>
-          </div>
+            {`${this.generateDay()}, ${time.getDate()} ${time.getMonth() + 1}, ${time.getFullYear()}`}
+          </p>
         </div>
-      ) : (
-        <div
-          style={{
-            height: "72px",
-            background: "rgba(0, 0, 0, 0.5)",
-            textAlign: "center",
-            color: "#FFFFFF",
-          }}
-        >
-          <div
-            className="time_upper"
-          >
-            <p
-              style={{
-                margin: 0,
-                paddingTop: "4px",
-                lineHeight: "36px",
-                fontSize: "38px",
-              }}
-            >
-              {`${time.getHours()} : ${time.getMinutes()}`}
-            </p>
-          </div>
-          <div
-            className="time_lower"
-          >
-            <p
-              style={{
-                margin: 0,
-                paddingBottom: "4px",
-                fontSize: "24px",
-              }}
-            >
-              {`${this.generateDay()}, ${time.getDate()} ${time.getMonth() + 1}, ${time.getFullYear()}`}
-            </p>
-          </div>
-        </div>
-      )
+      </div>
     );
   }
 }

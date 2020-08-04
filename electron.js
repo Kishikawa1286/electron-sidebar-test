@@ -12,6 +12,7 @@ function createWindow() {
   const { size } = screen.getPrimaryDisplay();
   const { width, height } = size;
   mainWindow = new BrowserWindow({
+    show: false,
     width: width * 0.3,
     height,
     x: (process.platform === "darwin") ? width : width * 0.7,
@@ -24,7 +25,6 @@ function createWindow() {
     contextIsolation: false,
     webPreferences: {
       webviewTag: true,
-      zoomFactor: 1.0,
       preload: `${__dirname}/preload.js`,
     },
   });
@@ -35,6 +35,11 @@ function createWindow() {
     slashes: true,
   });
   mainWindow.loadURL(startUrl);
+
+  mainWindow.once("ready-to-show", async () => {
+    await mainWindow.webContents.setZoomFactor(0.4);
+    mainWindow.show();
+  });
 
   mainWindow.on("closed", () => {
     mainWindow = null;
