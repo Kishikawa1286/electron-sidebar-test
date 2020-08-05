@@ -13,9 +13,9 @@ function createWindow() {
   const { width, height } = size;
   mainWindow = new BrowserWindow({
     show: false,
-    width: width * 0.3,
+    width: (process.platform === "darwin") ? width * 0.3 : width * 0.25,
     height,
-    x: (process.platform === "darwin") ? width : width * 0.7,
+    x: (process.platform === "darwin") ? width : width * 0.75,
     y: 0,
     transparent: true,
     frame: false,
