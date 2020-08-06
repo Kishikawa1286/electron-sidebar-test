@@ -4,7 +4,7 @@ const {
 } = require("electron");
 const { join } = require("path");
 const { format } = require("url");
-const { getUsedCpuPercentage, getUsedMemPercentage } = require("./lib/getUsedResource");
+const { getUsedCpuPercentage, getUsedMemPercentage } = require("./lib");
 
 let mainWindow;
 

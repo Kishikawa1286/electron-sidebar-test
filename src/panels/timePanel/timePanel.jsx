@@ -15,7 +15,7 @@ class TimePanel extends React.Component {
         this.setState({ time });
       },
       300,
-    ); // 500msごとに時刻表示を更新
+    );
   }
 
   generateDay() {
