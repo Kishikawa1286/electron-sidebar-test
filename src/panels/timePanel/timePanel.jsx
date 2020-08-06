@@ -14,7 +14,7 @@ class TimePanel extends React.Component {
         const time = new Date();
         this.setState({ time });
       },
-      500,
+      300,
     ); // 500msごとに時刻表示を更新
   }
 
@@ -34,6 +34,9 @@ class TimePanel extends React.Component {
 
   render() {
     const { time } = this.state;
+    const hours = `${time.getHours() < 10 ? `0${time.getHours()}` : time.getHours()}`;
+    const minutes = `${time.getMinutes() < 10 ? `0${time.getMinutes()}` : time.getMinutes()}`;
+    const seconds = `${time.getSeconds() < 10 ? `0${time.getSeconds()}` : time.getSeconds()}`;
     return (
       <div
         style={{
@@ -52,7 +55,7 @@ class TimePanel extends React.Component {
               fontSize: "38px",
             }}
           >
-            {`${time.getHours()} : ${time.getMinutes()} : ${time.getSeconds()}`}
+            {`${hours} : ${minutes} : ${seconds}`}
           </p>
         </div>
         <div className="time_lower">
