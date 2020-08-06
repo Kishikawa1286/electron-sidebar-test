@@ -1,0 +1,15 @@
+.usage_container {
+  display: flex;
+  height: 72px;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.usage_content {
+  width: 49.5%;
+  margin: 0;
+  padding: 0;
+  font-size: 32px;
+  line-height: 72px;
+  text-align: center;
+  color: #FFFFFF;
+}

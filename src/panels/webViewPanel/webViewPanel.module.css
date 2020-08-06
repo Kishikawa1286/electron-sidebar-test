@@ -1,0 +1,22 @@
+.webView_appBar_container {
+  width: 100%;
+  height: 36px;
+  margin: 0;
+  padding: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.webView_appBar_button {
+  margin: 0;
+  padding: 0 0 0 16px;
+  border: none;
+  outline: 0;
+  background: rgba(0, 0, 0, 0);
+  color: #FFFFFF;
+  font-size: 30px;
+  text-align: center;
+}
+
+.webView_content_container {
+  width: 100%;
+}

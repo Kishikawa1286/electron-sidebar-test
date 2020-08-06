@@ -1,0 +1,21 @@
+.time_container {
+  height: 72px;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.time_upper_content {
+  margin: 0;
+  padding-top: 4px;
+  line-height: 38px;
+  font-size: 36px;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.time_lower_content {
+  margin: 0;
+  padding-bottom: 4px;
+  font-size: 24px;
+  text-align: center;
+  color: #FFFFFF;
+}

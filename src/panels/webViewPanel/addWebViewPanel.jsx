@@ -1,5 +1,6 @@
 import React from "react";
 import { generate } from "shortid";
+import style from "./addWebViewPanel.module.css";
 
 const AddWebViewButton = (props) => {
   const {
@@ -7,47 +8,18 @@ const AddWebViewButton = (props) => {
     addWebView, src = "https://google.com", deleteAddWebViewButton,
   } = props;
   return (
-    <div
-      style={{
-        width: "100%",
-        height: "50px",
-        margin: 0,
-        padding: "10px 0 10px 20px",
-      }}
-    >
+    <div className={style.addWebView_item_container}>
       <button
         type="button"
+        className={style.addWebView_item_button}
         onClick={() => addWebView(src)}
-        style={{
-          width: "calc(100% - 70px)",
-          height: "50px",
-          margin: 0,
-          padding: 0,
-          border: "none",
-          outline: 0,
-          background: "rgba(0, 0, 0, 0)",
-          fontSize: "30px",
-          color: "#FFFFFF",
-          textAlign: "left",
-        }}
       >
         {src}
       </button>
       <button
         type="button"
+        className={style.addWebView_item_deleteButton}
         onClick={() => deleteAddWebViewButton()}
-        style={{
-          width: "50px",
-          height: "50px",
-          marginRight: 0,
-          padding: 0,
-          border: "none",
-          outline: 0,
-          background: "rgba(0, 0, 0, 0)",
-          fontSize: "30px",
-          color: "#FFFFFF",
-          textAlign: "center",
-        }}
       >
         -
       </button>
@@ -101,27 +73,11 @@ class AddWebViewPanel extends React.Component {
   render() {
     const { AddWebViewButtons } = this.state;
     return (
-      <div style={{ background: "rgba(0, 0, 0, 0.5)", paddingTop: "50px" }}>
-        <div
-          style={{
-            width: "100%",
-            height: "50px",
-            margin: 0,
-          }}
-        >
+      <div className={style.addWebView_container}>
+        <div className={style.addWebView_addItem_container}>
           <input
             type="text"
-            style={{
-              width: "calc(100% - 70px)",
-              height: "50px",
-              margin: 0,
-              padding: "0 0 0 20px",
-              border: "none",
-              outline: 0,
-              background: "rgba(0, 0, 0, 0)",
-              fontSize: "30px",
-              color: "#FFFFFF",
-            }}
+            className={style.addWebView_addItem_input}
             ref={(input) => { this.inputRef = input; }}
             onKeyPress={(event) => {
               if (event.key === "Enter" && this.inputRef.value !== "") {
@@ -132,23 +88,12 @@ class AddWebViewPanel extends React.Component {
           />
           <button
             type="button"
+            className={style.addWebView_addItem_addButton}
             onClick={() => {
               if (this.inputRef.value !== "") {
                 this.createNewAddWebViewButton(this.inputRef.value);
                 this.inputRef.value = "";
               }
-            }}
-            style={{
-              width: "50px",
-              height: "50px",
-              marginRight: 0,
-              padding: 0,
-              border: "none",
-              outline: 0,
-              background: "rgba(0, 0, 0, 0)",
-              fontSize: "30px",
-              color: "#FFFFFF",
-              textAlign: "center",
             }}
           >
             +

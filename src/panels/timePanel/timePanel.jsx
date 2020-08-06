@@ -1,4 +1,5 @@
 import React from "react";
+import style from "./timePanel.module.css";
 
 // 時間の取得処理に脆弱性あり
 class TimePanel extends React.Component {
@@ -38,34 +39,14 @@ class TimePanel extends React.Component {
     const minutes = `${time.getMinutes() < 10 ? `0${time.getMinutes()}` : time.getMinutes()}`;
     const seconds = `${time.getSeconds() < 10 ? `0${time.getSeconds()}` : time.getSeconds()}`;
     return (
-      <div
-        style={{
-          height: "72px",
-          background: "rgba(0, 0, 0, 0.5)",
-          textAlign: "center",
-          color: "#FFFFFF",
-        }}
-      >
-        <div className="time_upper">
-          <p
-            style={{
-              margin: 0,
-              paddingTop: "4px",
-              lineHeight: "36px",
-              fontSize: "38px",
-            }}
-          >
+      <div className={style.time_container}>
+        <div>
+          <p className={style.time_upper_content}>
             {`${hours} : ${minutes} : ${seconds}`}
           </p>
         </div>
-        <div className="time_lower">
-          <p
-            style={{
-              margin: 0,
-              paddingBottom: "4px",
-              fontSize: "24px",
-            }}
-          >
+        <div>
+          <p className={style.time_lower_content}>
             {`${this.generateDay()}, ${time.getDate()} ${time.getMonth() + 1}, ${time.getFullYear()}`}
           </p>
         </div>

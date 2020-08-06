@@ -1,4 +1,5 @@
 import React from "react";
+import style from "./webViewPanel.module.css";
 
 const WebViewAppBarButton = (props) => {
   // eslint-disable-next-line react/prop-types
@@ -6,17 +7,8 @@ const WebViewAppBarButton = (props) => {
   return (
     <button
       type="button"
+      className={style.webView_appBar_button}
       onClick={onClick}
-      style={{
-        margin: 0,
-        padding: "0 0 0 16px",
-        border: "none",
-        outline: 0,
-        background: "rgba(0, 0, 0, 0)",
-        color: "#FFFFFF",
-        fontSize: "30px",
-        textAlign: "center",
-      }}
     >
       {text}
     </button>
@@ -36,24 +28,16 @@ class WebViewPanel extends React.Component {
     } = this.props;
     return (
       <div>
-        <div
-          style={{
-            width: "100%",
-            height: "36px",
-            margin: 0,
-            padding: 0,
-            background: "rgba(0, 0, 0, 0.5)",
-          }}
-        >
+        <div className={style.webView_appBar_container}>
           <WebViewAppBarButton text="✕" onClick={deleteWebView} />
           <WebViewAppBarButton text="<" onClick={() => this.webViewRef.goBack()} />
           <WebViewAppBarButton text=">" onClick={() => this.webViewRef.goForward()} />
         </div>
-        <div style={{ width: "100%", height: `${height}px` }}>
+        <div className={style.webView_content_container} height={height}>
           <webview
             key={key || "key_expected"}
             src={src}
-            height={height.toString()}
+            height={height}
             style={{ minHeight: `${height}px` }}
             ref={(webview) => { this.webViewRef = webview; }}
           />

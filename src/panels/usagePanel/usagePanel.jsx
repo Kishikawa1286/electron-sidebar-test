@@ -1,4 +1,5 @@
 import React from "react";
+import style from "./usagePanel.module.css";
 // eslint-disable-next-line no-undef
 const { ipcRenderer } = window.native;
 
@@ -36,37 +37,12 @@ class UsagePanel extends React.Component {
 
   render() {
     const { usedCpuPercentage, usedMemPercentage } = this.state;
-    const height = "72px";
     return (
-      <div
-        style={{
-          display: "flex",
-          height,
-          background: "rgba(0, 0, 0, 0.5)",
-          textAlign: "center",
-          color: "#FFFFFF",
-        }}
-      >
-        <p
-          style={{
-            width: "49.5%",
-            margin: 0,
-            padding: 0,
-            fontSize: "32px",
-            lineHeight: height,
-          }}
-        >
+      <div className={style.usage_container}>
+        <p className={style.usage_content}>
           {`Cpu : ${usedCpuPercentage.toFixed(1)}% used`}
         </p>
-        <p
-          style={{
-            width: "49.5%",
-            margin: 0,
-            padding: 0,
-            fontSize: "32px",
-            lineHeight: height,
-          }}
-        >
+        <p className={style.usage_content}>
           {`Memory : ${usedMemPercentage.toFixed(1)}% used`}
         </p>
       </div>
