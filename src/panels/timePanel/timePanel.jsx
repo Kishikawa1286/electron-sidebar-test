@@ -10,7 +10,10 @@ class TimePanel extends React.Component {
 
   componentDidMount() {
     setInterval(
-      this.setState({ time: new Date() }),
+      () => {
+        const time = new Date();
+        this.setState({ time });
+      },
       500,
     ); // 500msごとに時刻表示を更新
   }
@@ -49,7 +52,7 @@ class TimePanel extends React.Component {
               fontSize: "38px",
             }}
           >
-            {`${time.getHours()} : ${time.getMinutes()}`}
+            {`${time.getHours()} : ${time.getMinutes()} : ${time.getSeconds()}`}
           </p>
         </div>
         <div className="time_lower">
