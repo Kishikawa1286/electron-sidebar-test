@@ -111,9 +111,7 @@ class Sidebar extends React.Component {
           idField="id"
           disabledField="disabled"
           data={data}
-
           itemUI={SortableItemUI}
-
           onDragOver={this.onDrag.bind(this)}
           onNavigate={this.onDrag.bind(this)}
         />
